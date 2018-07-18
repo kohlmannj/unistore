@@ -2,15 +2,16 @@
 // S - Wrapped component state
 // K - Store state
 // I - Injected props to wrapped component
+// A - Bound actions
 
 declare module "unistore/react" {
 	import * as React from "react";
 	import { ActionCreator, StateMapper, Store } from "unistore";
 
-	export function connect<T, S, K, I>(
+	export function connect<T, S, K, I, A>(
 		mapStateToProps: string | Array<string> | StateMapper<T, K, I>,
 		actions?: ActionCreator<K> | object
-	): (Child: ((props: T & I) => React.ReactNode) | (ComponentConstructor<T, S>)) => ComponentConstructor<T, S>;
+	): (Child: ((props: T & I & A) => React.ReactNode) | (ComponentConstructor<T & I & A, S>)) => ComponentConstructor<T, S>;
 
 	export interface ProviderProps<T> {
 		store: Store<T>;
